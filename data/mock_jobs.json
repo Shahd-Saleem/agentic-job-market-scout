@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "title": "AI Engineering Intern",
+    "company": "Bain & Company",
+    "location": "Dubai / Riyadh",
+    "required_skills": ["Python", "FastAPI", "RAG", "LLMs"],
+    "description": "Contribute to the design and development of GenAI applications and agentic solutions."
+  },
+  {
+    "id": 2,
+    "title": "Backend & AI Engineer",
+    "company": "FlyRank AI",
+    "location": "Remote / Dubai",
+    "required_skills": ["Python", "FastAPI", "PostgreSQL", "Docker", "Pydantic"],
+    "description": "Build production-ready Python RESTful APIs and backend AI microservices."
+  },
+  {
+    "id": 3,
+    "title": "Junior Machine Learning Engineer",
+    "company": "MENA Tech Hub",
+    "location": "Dubai",
+    "required_skills": ["Python", "PyTorch", "OpenCV", "Docker"],
+    "description": "Develop computer vision and machine learning pipelines for enterprise applications."
+  }
+]
