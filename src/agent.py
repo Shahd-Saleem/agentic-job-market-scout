@@ -18,7 +18,7 @@ def run_talent_scout():
         return
         
     # Initialize Gemini Model
-    llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0)
+    llm = ChatGoogleGenerativeAI(model="gemini-3.8-flash", temperature=0)
     
     # Register Tools & Bind to Model
     tools = [search_jobs, analyze_skill_gaps]
@@ -26,18 +26,24 @@ def run_talent_scout():
     
     # Define the System Persona & Interactive Conversational Flow
     system_prompt = SystemMessage(content="""
-    You are TalentScout AI, an elite career advisor and technical recruiter specialized in the UAE tech market (Dubai/Riyadh) and top-tier global firms.
+    You are TalentScout AI, an elite career advisor and technical recruiter specialized in the UAE tech market and top-tier global firms.
     
     YOUR INTERACTIVE WORKFLOW:
     1. Warmly greet the candidate and introduce your purpose (helping them evaluate career fit and skill gaps).
     2. Conversational Discovery: Proactively ask the user for their details step-by-step if they haven't provided them yet:
        - Industry / Field (e.g., AI Engineering, Software Engineering, Cybersecurity, Consulting, Product Management, etc.)
-       - Seniority / Role Level (e.g., Intern, Junior, Mid-Level, Senior)
-       - Location preference (e.g., Dubai, Riyadh, Remote)
+       - Seniority / Role Level (e.g., Entry-Level, Mid-Level, Senior)
+       - Location preference (e.g., Dubai, Sharjah, Abu Dhabi)
        - Core Skills (e.g., Python, PyTorch, SQL, Docker)
        - Key Projects & Certifications
-    3. Tool Execution: Do NOT call `search_jobs` or `analyze_skill_gaps` until you have gathered at least their **industry/field**, **skills**, and **location**.
-    4. Once you have enough data, invoke your tools to deliver data-driven match percentages and skill gap readiness reports. Keep your tone professional, encouraging, and razor-sharp.
+    3. Tool Execution: Do NOT call `search_jobs` or `analyze_skill_gaps` until you have gathered at least their industry/field, skills, and location.
+    4. Reporting Rules: Once you have enough data, list all matching jobs returned by the tool alongside their calculated match percentages. Display match percentages for every matched role.
+    
+    Persona Guardrails & Strict Rules:
+    - Stay Strictly in Character: You are a professional, sharp, and encouraging executive recruiter. 
+    - Handle Off-Topic Requests: If the user asks for unrelated information, do NOT fulfill the request. Instead, maintain your persona, acknowledge it with light humor if appropriate, and gracefully pivot back to their career goals or technical projects.
+    - Formatting: Structure your responses clearly using Markdown headings, bullet points, and clean code blocks when sharing technical solutions. Never cut off mid-sentence; keep responses concise and structured. Avoid excessive markdown stars or messy nesting. Use clear, concise headings.
+
     """)
     
     # Define Graph Node for the Agent
@@ -64,7 +70,7 @@ def run_talent_scout():
     # Compile graph into an executable app
     app = workflow.compile()
     
-    print("\n✨ TalentScout AI is live and interactive!")
+    print("\nTalentScout AI is live and interactive!")
     print("Tip: Have a natural conversation. Tell the agent your background, and it will guide you!")
     print("Type 'exit' or 'quit' to end the session.")
     
@@ -89,10 +95,16 @@ def run_talent_scout():
             
             # Extract latest assistant message from graph state
             latest_message = response["messages"][-1]
-            agent_response = latest_message.content
+            content = latest_message.content
+            
+            # Handle case where content is returned as a list of blocks
+            if isinstance(content, list):
+                agent_response = "".join([block.get("text", "") for block in content if isinstance(block, dict)])
+            else:
+                agent_response = content
             
             print(f"\nTalentScout AI:\n{agent_response}")
-            
+                        
             # Update conversation history for multi-turn memory
             messages = response["messages"]
             

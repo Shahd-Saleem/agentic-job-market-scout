@@ -2,85 +2,79 @@ import json
 import os
 from langchain_core.tools import tool
 
-@tool
-def search_jobs(location: str, industry: str, seniority: str, user_skills: list[str]) -> str:
-    """
-    Search for job postings in mock_jobs.json matching location, industry, and seniority,
-    and compute a skill match score for the user.
-    """
-    data_path = os.path.join(os.path.dirname(__file__), "../data/mock_jobs.json")
-    if not os.path.exists(data_path):
-        return "Job database not found."
-        
-    with open(data_path, "r") as f:
-        jobs = json.load(f)
-        
-    results = []
-    user_skills_lower = [s.lower() for s in user_skills]
+def load_jobs_data():
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    json_path = os.path.join(base_dir, "data", "mock_jobs.json")
+    if os.path.exists(json_path):
+        with open(json_path, "r", encoding="utf-8") as f:
+            return json.load(f)
+    return []
 
+@tool
+def search_jobs(query: str, location: str, user_skills: list[str] = None) -> str:
+    """
+    Search available tech and AI job openings based on keywords and location. 
+    Automatically calculates match percentage and missing skills for each job.
+    """
+    jobs = load_jobs_data()
+    results = []
+    
+    query_lower = query.lower()
+    loc_lower = location.lower()
+    user = set(s.lower() for s in (user_skills or []))
+    
     for job in jobs:
-        loc_match = location.lower() in job["location"].lower()
-        ind_match = industry.lower() in job["industry"].lower()
-        sen_match = seniority.lower() in job["seniority"].lower()
+        loc_match = loc_lower in job["location"].lower()
+        title_match = query_lower in job["title"].lower()
+        desc_match = query_lower in job["description"].lower()
+        skill_match = any(query_lower in skill.lower() for skill in job["required_skills"])
         
-        if loc_match and ind_match and sen_match:
-            required = job.get("required_skills", [])
-            
-            if required:
-                matched_skills = [s for s in required if s.lower() in user_skills_lower]
-                match_percentage = f"{int((len(matched_skills) / len(required)) * 100)}%"
+        if loc_match and (title_match or desc_match or skill_match or not query_lower):
+            required = set(s.lower() for s in job["required_skills"])
+            if user and required:
+                matched = required.intersection(user)
+                missing = required - user
+                match_percentage = int((len(matched) / len(required)) * 100)
             else:
-                matched_skills = []
-                match_percentage = "N/A (No requirements specified)"
+                missing = required
+                match_percentage = 0
             
             job_copy = job.copy()
-            job_copy["match_percentage"] = match_percentage
-            job_copy["matched_skills"] = matched_skills
+            job_copy["match_percentage"] = f"{match_percentage}%"
+            job_copy["missing_skills"] = list(missing)
             results.append(job_copy)
             
     if not results:
-        return f"No jobs found matching location '{location}', industry '{industry}', and seniority '{seniority}'."
+        return f"No exact job matches found for '{query}' in '{location}'. Try broadening your search terms!"
         
     return json.dumps(results, indent=2)
 
-
 @tool
-def analyze_skill_gaps(user_skills: list[str], projects: list[str], certifications: list[str], industry: str) -> str:
+def analyze_skill_gaps(user_skills: list[str], target_role: str) -> str:
     """
-    Analyze skill gaps by cross-referencing user skills, projects, and certifications 
-    against industry baselines.
+    Analyze the skill gaps between a candidate's current skills and a specific target role.
     """
-    industry_baselines = {
-        "ai engineering": ["Python", "Agentic AI", "LLMs", "Docker", "RAG", "Prompt Engineering"],
-        "machine learning": ["Python", "PyTorch", "Scikit-Learn", "Pandas", "Docker"],
-        "software engineering": ["Python/Java/JavaScript", "Data Structures", "Git", "System Design", "Docker", "SQL"],
-        "web development": ["JavaScript/TypeScript", "React", "HTML/CSS", "Node.js", "REST APIs", "GitHub"],
-        "consulting": ["Problem Solving", "Data Analysis", "Client Communication", "Excel/PowerPoint", "Strategic Frameworks"],
-        "product management": ["User Research", "Roadmapping", "Agile/Scrum", "Data Analytics", "GitHub"],
-        "cybersecurity": ["Network Security", "Python", "Linux", "SIEM", "Penetration Testing", "IAM"],
-        "data engineering": ["SQL", "Python", "Apache Spark", "Airflow", "Docker", "PostgreSQL"],
-        "cloud computing": ["AWS/Azure", "Terraform", "Docker", "Kubernetes", "Linux", "CI/CD"]
+    jobs = load_jobs_data()
+    target_job = next((j for j in jobs if target_role.lower() in j["title"].lower() or target_role.lower() in j["company"].lower()), None)
+    
+    if not target_job:
+        return f"Could not find a specific benchmark role matching '{target_role}'."
+        
+    required = set(s.lower() for s in target_job["required_skills"])
+    user = set(s.lower() for s in user_skills)
+    
+    missing = required - user
+    matched = required.intersection(user)
+    
+    match_percentage = int((len(matched) / len(required)) * 100) if required else 100
+    
+    report = {
+        "target_role": target_job["title"],
+        "company": target_job["company"],
+        "match_percentage": f"{match_percentage}%",
+        "matched_skills": list(matched),
+        "missing_skills": list(missing),
+        "recommendation": "Ready to apply!" if match_percentage >= 75 else "Recommended to upskill in missing areas before applying."
     }
     
-    industry_key = industry.lower()
-    required_baseline = industry_baselines.get(industry_key, ["Python", "Git", "Problem Solving", "SQL"])
-    
-    # Combine explicit skills, projects, and certifications into one text block for holistic evaluation
-    all_user_competencies = " ".join(user_skills + projects + certifications).lower()
-    
-    missing_skills = [s for s in required_baseline if s.lower() not in all_user_competencies]
-    acquired_skills = [s for s in required_baseline if s.lower() in all_user_competencies]
-    
-    readiness_score = int((len(acquired_skills) / len(required_baseline)) * 100) if required_baseline else 100
-    
-    analysis = {
-        "industry": industry,
-        "readiness_score": f"{readiness_score}%",
-        "acquired_core_skills": acquired_skills,
-        "missing_gaps": missing_skills,
-        "portfolio_projects_evaluated": len(projects),
-        "certifications_evaluated": len(certifications),
-        "strategic_recommendation": f"To hit 100% readiness in {industry}, prioritize building projects or gaining certifications in: {', '.join(missing_skills)}." if missing_skills else f"Your profile shows complete baseline readiness for top-tier {industry} roles!"
-    }
-    
-    return json.dumps(analysis, indent=2)
+    return json.dumps(report, indent=2)

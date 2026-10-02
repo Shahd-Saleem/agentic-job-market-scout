@@ -3,24 +3,240 @@
     "id": 1,
     "title": "AI Engineering Intern",
     "company": "Bain & Company",
-    "location": "Dubai / Riyadh",
-    "required_skills": ["Python", "FastAPI", "RAG", "LLMs"],
-    "description": "Contribute to the design and development of GenAI applications and agentic solutions."
+    "location": "Dubai",
+    "required_skills": ["Python", "FastAPI", "RAG", "LLMs", "LangChain"],
+    "description": "Contribute to the design and development of GenAI applications and agentic solutions for elite enterprise clients across the UAE."
   },
   {
     "id": 2,
     "title": "Backend & AI Engineer",
     "company": "FlyRank AI",
-    "location": "Remote / Dubai",
+    "location": "Dubai",
     "required_skills": ["Python", "FastAPI", "PostgreSQL", "Docker", "Pydantic"],
-    "description": "Build production-ready Python RESTful APIs and backend AI microservices."
+    "description": "Build production-ready Python RESTful APIs and backend AI microservices utilizing high-performance vector stores and modern asynchronous frameworks."
   },
   {
     "id": 3,
     "title": "Junior Machine Learning Engineer",
     "company": "MENA Tech Hub",
+    "location": "Sharjah",
+    "required_skills": ["Python", "PyTorch", "OpenCV", "Docker", "SQL"],
+    "description": "Develop computer vision, object detection, and machine learning pipelines for automated enterprise surveillance and sorting systems."
+  },
+  {
+    "id": 4,
+    "title": "Generative AI Developer",
+    "company": "Dubai Future Foundation",
     "location": "Dubai",
-    "required_skills": ["Python", "PyTorch", "OpenCV", "Docker"],
-    "description": "Develop computer vision and machine learning pipelines for enterprise applications."
+    "required_skills": ["Python", "LangGraph", "ChromaDB", "Gemini API", "Streamlit"],
+    "description": "Build cutting-edge agentic workflows, multi-agent LLM systems, and retrieval-augmented generation tools for government innovation initiatives."
+  },
+  {
+    "id": 5,
+    "title": "AI Solutions Associate",
+    "company": "Careem",
+    "location": "Abu Dhabi",
+    "required_skills": ["Python", "SQL", "LLMs", "API Development"],
+    "description": "Design and scale intelligent customer support and operational automation agents powering everyday super-app services across the Middle East."
+  },
+  {
+    "id": 6,
+    "title": "Cloud & DevOps Engineer",
+    "company": "Amazon Web Services (AWS)",
+    "location": "Dubai",
+    "required_skills": ["Docker", "Kubernetes", "Terraform", "AWS", "Python", "CI/CD"],
+    "description": "Design, automate, and scale cloud infrastructure and secure deployment pipelines for enterprise cloud migrations in the region."
+  },
+  {
+    "id": 7,
+    "title": "Junior Cybersecurity Analyst",
+    "company": "DarkMatter / Cyber Security Council UAE",
+    "location": "Abu Dhabi",
+    "required_skills": ["Python", "Linux", "Network Security", "SQL", "SIEM"],
+    "description": "Monitor security access events, analyze vulnerabilities, and assist in incident response operations for critical national infrastructure."
+  },
+  {
+    "id": 8,
+    "title": "Full-Stack Software Engineer",
+    "company": "Aramex",
+    "location": "Sharjah",
+    "required_skills": ["JavaScript", "Python", "React", "Node.js", "PostgreSQL", "Docker"],
+    "description": "Build scalable logistics tracking platforms, internal dashboards, and customer-facing web applications serving millions of users."
+  },
+  {
+    "id": 9,
+    "title": "Data Engineering Associate",
+    "company": "Emirates NBD",
+    "location": "Ajman",
+    "required_skills": ["Python", "SQL", "Spark", "PostgreSQL", "ETL"],
+    "description": "Architect robust data pipelines, clean large-scale financial datasets, and power modern business intelligence dashboards."
+  },
+  {
+    "id": 10,
+    "title": "Frontend Web Developer (Intern)",
+    "company": "Noon",
+    "location": "Dubai",
+    "required_skills": ["JavaScript", "React", "HTML/CSS", "Tailwind", "Git"],
+    "description": "Craft lightning-fast, responsive user interfaces and checkout experiences for the region's leading e-commerce platform."
+  },
+  {
+    "id": 11,
+    "title": "Senior Backend Software Engineer",
+    "company": "Talabat",
+    "location": "Dubai",
+    "required_skills": ["Python", "Java", "Microservices", "Kafka", "PostgreSQL", "Docker", "Kubernetes"],
+    "description": "Lead core food-delivery logistics microservices, handling massive real-time order volume and high concurrency across Gulf markets."
+  },
+  {
+    "id": 12,
+    "title": "Technical Product Manager",
+    "company": "Kitopi",
+    "location": "Dubai",
+    "required_skills": ["Agile", "API Development", "SQL", "Product Roadmapping", "Scrum"],
+    "description": "Bridge engineering teams and culinary operations, defining feature roadmaps for kitchen automation software and inventory APIs."
+  },
+  {
+    "id": 13,
+    "title": "Technical Consultant / Associate",
+    "company": "McKinsey & Company",
+    "location": "Dubai / Riyadh",
+    "required_skills": ["Python", "SQL", "Client Management", "Cloud Computing", "Business Analysis"],
+    "description": "Advise C-level executives on digital transformation strategies, cloud adoption frameworks, and technical architecture blueprints."
+  },
+  {
+    "id": 14,
+    "title": "UX / UI Design Intern",
+    "company": "Fetchr",
+    "location": "Dubai",
+    "required_skills": ["Figma", "User Research", "Prototyping", "Wireframing", "Design Systems"],
+    "description": "Design intuitive mobile and web tracking interfaces, conducting user testing sessions with couriers and end-consumers."
+  },
+  {
+    "id": 15,
+    "title": "Network & Infrastructure Engineer",
+    "company": "du",
+    "location": "Dubai",
+    "required_skills": ["Cisco", "TCP/IP", "Network Security", "Linux", "Routing"],
+    "description": "Deploy, monitor, and secure enterprise telecom core routing and fiber network switching architecture across the UAE."
+  },
+  {
+    "id": 16,
+    "title": "Mobile App Developer (Flutter / React Native)",
+    "company": "Anghami",
+    "location": "Abu Dhabi / Dubai",
+    "required_skills": ["Flutter", "Dart", "JavaScript", "REST APIs", "Mobile CI/CD"],
+    "description": "Build seamless audio streaming mobile app experiences, offline caching features, and native audio bridge modules for millions of users."
+  },
+  {
+    "id": 17,
+    "title": "Game Developer (Unity / Roblox)",
+    "company": "GamerG",
+    "location": "Dubai",
+    "required_skills": ["C#", "Unity", "Lua", "Game Physics", "Multiplayer Networking"],
+    "description": "Develop immersive multiplayer gaming experiences, physics mechanics, and real-time interactive virtual events for regional esports tournaments."
+  },
+  {
+    "id": 18,
+    "title": "Senior Cloud Architect",
+    "company": "Microsoft UAE",
+    "location": "Dubai",
+    "required_skills": ["Azure", "Kubernetes", "Terraform", "Enterprise Architecture", "DevSecOps"],
+    "description": "Architect multi-region Azure cloud deployments, govern enterprise security compliance, and guide regional clients through massive cloud transformations."
+  },
+  {
+    "id": 19,
+    "title": "Data Analyst Intern",
+    "company": "BMW Group",
+    "location": "Dubai",
+    "required_skills": ["Python", "SQL", "Tableau", "Excel", "Data Visualization"],
+    "description": "Analyze regional automotive retail metrics, customer behavior trends, and supply chain logistics data to drive executive business decisions."
+  },
+  {
+    "id": 20,
+    "title": "Technical Product Management Associate",
+    "company": "Mastercard",
+    "location": "Dubai",
+    "required_skills": ["Agile", "API Documentation", "SQL", "Product Strategy", "Scrum"],
+    "description": "Collaborate with global payment engineering teams to define feature backlogs, write technical user stories, and launch secure fintech APIs."
+  },
+  {
+    "id": 21,
+    "title": "Backend Python Engineering Intern",
+    "company": "AI.AT.CORE",
+    "location": "Dubai / Remote",
+    "required_skills": ["Python", "FastAPI", "Docker", "PostgreSQL", "REST APIs"],
+    "description": "Develop scalable backend microservices, write clean asynchronous Python endpoints, and integrate high-performance databases for AI applications."
+  },
+  {
+    "id": 22,
+    "title": "Technical Sales Graduate Program",
+    "company": "Lenovo",
+    "location": "Dubai",
+    "required_skills": ["Cloud Infrastructure", "Client Relations", "Technical Architecture", "Python", "Problem Solving"],
+    "description": "Bridge enterprise clients and hardware/software engineering teams by designing tailored tech stack solutions and datacenter proposals."
+  },
+  {
+    "id": 23,
+    "title": "Smart Systems Intern",
+    "company": "Sharjah Government Media Bureau",
+    "location": "Sharjah",
+    "required_skills": ["Python", "Full-Stack Development", "Automation", "AI Tools", "SQL"],
+    "description": "Deploy automated internal tracking tools, build administrative web applications, and assist in digital transformation initiatives for government media."
+  },
+  {
+    "id": 24,
+    "title": "Associate AI Engineer",
+    "company": "Printerpix",
+    "location": "Dubai",
+    "required_skills": ["Python", "Agentic AI", "LLMs", "RAG", "Git", "FastAPI", "Docker"],
+    "description": "Implement computer vision pipelines for automated image enhancement, quality checking, and personalized print-on-demand processing workflows."
+  },
+  {
+    "id": 25,
+    "title": "Computer Science Teacher",
+    "company": "Dubai National School",
+    "location": "Dubai",
+    "required_skills": ["Python", "Pedagogy", "Curriculum Design", "Problem Solving", "Communication"],
+    "description": "Inspire and educate middle and high school students in foundational programming, computational thinking, and basic software logic."
+  },
+  {
+    "id": 26,
+    "title": "Programming Lab Instructor",
+    "company": "American University of Sharjah (AUS)",
+    "location": "Sharjah",
+    "required_skills": ["Python", "Java", "Debugging", "Data Structures", "Mentorship"],
+    "description": "Guide undergraduate computer science students through core lab assignments, debug complex code logic, and evaluate algorithmic implementations."
+  },
+  {
+    "id": 27,
+    "title": "Software Engineering Intern",
+    "company": "Siemens Energy",
+    "location": "Abu Dhabi",
+    "required_skills": ["Python", "SQL", "React", "Git", "REST APIs"],
+    "description": "Contribute to enterprise software solutions, energy management automation tools, and backend cloud monitoring services."
+  },
+  {
+    "id": 28,
+    "title": "Junior AI Engineer",
+    "company": "InterSystems",
+    "location": "Dubai",
+    "required_skills": ["Python", "SQL", "RAG", "FastAPI", "Vector Databases"],
+    "description": "Build high-performance data and AI microservices, integrating advanced search capabilities and health/enterprise data analytics."
+  },
+  {
+    "id": 29,
+    "title": "Junior Software Developer (Odoo / Python)",
+    "company": "Odoo Middle East",
+    "location": "Dubai",
+    "required_skills": ["Python", "SQL", "JavaScript", "Data Structures"],
+    "description": "Develop and customize modular enterprise business applications, implement Odoo ERP workflows, and write clean backend Python code for regional clients."
+  },
+  {
+    "id": 30,
+    "title": "Forward Deployed Software Engineer",
+    "company": "Boston Consulting Group (BCG X)",
+    "location": "Dubai / Riyadh",
+    "required_skills": ["Python", "Docker", "FastAPI", "Client Management", "Cloud Architecture"],
+    "description": "Deploy bespoke AI solutions, scalable software systems, and data pipelines directly on-site with elite enterprise clients across the GCC."
   }
 ]
