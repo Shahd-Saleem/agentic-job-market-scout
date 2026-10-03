@@ -132,10 +132,10 @@ agentic-job-market-scout/
 │   ├── state.py
 │   └── tools.py
 │
-├── __pycache__/
 ├── .gitignore
 ├── LICENSE
-└── README.md
+├── README.md
+└── requirements.txt
 ```
 
 ### `agent.py`
@@ -211,10 +211,10 @@ Activate it on Windows:
 venv\Scripts\activate
 ```
 
-Install the required packages:
+Install the required dependencies:
 
 ```bash
-pip install langchain langgraph langchain-google-genai python-dotenv pydantic
+pip install -r requirements.txt
 ```
 
 ## Environment Variables
